@@ -5,18 +5,20 @@ import java.util.List;
 
 public class Regine {
 
-	List<List<Integer>> tutte;
-	public List<List<Integer>> cercaRegine(int N) {
-		this.tutte=new ArrayList<List<Integer>>();
+	List<Integer> soluzione;
+	public List<Integer> cercaRegine(int N) {
+
+		this.soluzione=null;
 		List<Integer> parziale = new ArrayList<Integer>();
 		regine_ricorsiva(parziale,0,N);
-		return this.tutte;
+		return this.soluzione;
 	}
 	
-	private void regine_ricorsiva(List <Integer> parziale, int livello, int N) {
+	private boolean regine_ricorsiva(List <Integer> parziale, int livello, int N) {
 		if(livello==N) {//caso terminale
 			System.out.println(parziale);
-			this.tutte.add(new ArrayList <Integer>(parziale));
+			this.soluzione=new ArrayList <Integer>(parziale);
+			return false; // non continua
 		}else {//caso generico
 			// ho già da parziale[0] a parziale [livello-1]
 			//devo decidere parziale[livello]
@@ -24,10 +26,13 @@ public class Regine {
 			for(int col=0; col<N ;col++) {
 				if(compatibile(livello, col, parziale)==true) {//se col è compatibile con parziale faccio la ricorsione
 					parziale.add(col);
-					regine_ricorsiva(parziale,livello+1,N);
+					boolean continua=regine_ricorsiva(parziale,livello+1,N);
+					if(!continua)
+						return false; // non continua
 					parziale.remove(parziale.size()-1); //backtracking
 				}
 			}
+			return true;
 		}
 	}
 	
