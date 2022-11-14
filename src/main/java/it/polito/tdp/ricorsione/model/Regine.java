@@ -5,14 +5,18 @@ import java.util.List;
 
 public class Regine {
 
-	public void cercaRegine(int N) {
+	List<List<Integer>> tutte;
+	public List<List<Integer>> cercaRegine(int N) {
+		this.tutte=new ArrayList<List<Integer>>();
 		List<Integer> parziale = new ArrayList<Integer>();
 		regine_ricorsiva(parziale,0,N);
+		return this.tutte;
 	}
 	
 	private void regine_ricorsiva(List <Integer> parziale, int livello, int N) {
 		if(livello==N) {//caso terminale
 			System.out.println(parziale);
+			this.tutte.add(new ArrayList <Integer>(parziale));
 		}else {//caso generico
 			// ho già da parziale[0] a parziale [livello-1]
 			//devo decidere parziale[livello]
