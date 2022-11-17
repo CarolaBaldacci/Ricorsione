@@ -1,7 +1,5 @@
 package it.polito.tdp.ricorsione.model;
 
-import it.polito.tdp.ricorsione.EntryPoint;
-
 public class Anagrammi {
 	
 //Riceve una stringa e stampa tutti i suoi l'anagramma
